@@ -111,7 +111,7 @@ class Marketo
                     $leadDataPoints[] = $dataPoint;
                 }
             }
-        } else{
+        } else {
             $this->LogMarketoErrors($response);
         }
         return $leadDataPoints;
@@ -122,7 +122,7 @@ class Marketo
             foreach($response->errors as $error){
                 \Log::addError('Marketo Error: (' . $error->code . ')' . $error->message);
             }
-        } else{
+        } else {
             \Log::addError('Marketo Error');
         }
     }
