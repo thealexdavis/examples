@@ -64,7 +64,7 @@ class Marketo
         $marketoCookie = $this->getMarketoCookie();
         $marketoCookie = str_replace("%3A", ":", $marketoCookie);
         $marketoCookie = str_replace("%25", "%", $marketoCookie);
-		$marketoCookie - urldecode($marketoCookie);
+		$marketoCookie = urldecode($marketoCookie);
         if($marketoCookie != null){
             $leadDataPoints = json_decode($settings['marketoTrackedLeadData']);
             $fields = [];
