@@ -16,8 +16,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/items/'.$id.'',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
 			);
@@ -34,7 +34,7 @@ class Uberflip {
 		if ($cacheObject->isMiss()) {
 			$cacheObject->lock();
 			$itemInfo = $this->uberflipSendoff(
-				'https://api.uberflip.com/?APIKey=YzI0MDVkMDM1ZTQ3YTJkOWJiNjQ2NTUwYWJhYjk4ZTI=&Signature=ZTljMjAxNTI3ODVjY2U3NWY0MWI3MTk1ZjBlNjhiNTE4NTE3NmU3YQ==&Version=0.1&Method=GetHubItemData&ItemId='.$id.'&ResponseType=JSON',
+				'https://api.uberflip.com/?APIKey=XXX=&Signature=XXX==&Version=0.1&Method=GetHubItemData&ItemId='.$id.'&ResponseType=JSON',
 			    array(),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
@@ -55,8 +55,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/hubs/'.$id.'/streams?limit=100&sort=-modified_at',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
 			);
@@ -77,8 +77,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/streams/'.$id.'/items?limit=100&sort=-modified_at',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
 			);
@@ -98,8 +98,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/hubs?limit=100&sort=name',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
 			);
@@ -119,8 +119,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/hubs/'.$id.'?limit=100&sort=name',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'GET',
 			    array('Authorization: Bearer '.$this->getToken().'')
 			);
@@ -158,8 +158,8 @@ class Uberflip {
 				'https://v2.api.uberflip.com/authorize',
 			    array(
 				    	'grant_type' => 'client_credentials', 
-				    	'client_id' => '99d8f874dcb45904d7942d8391626755',
-				    	'client_secret' => '6bb7c35bb75c1b40b675ba95935b31237b12a67a'),
+				    	'client_id' => Core::make('uberflip/helper/tools')->getSettingsArray('id'),
+				    	'client_secret' => Core::make('uberflip/helper/tools')->getSettingsArray('secret')),
 				    'POST',
 			    array('Content-Type:application/json')
 			);
