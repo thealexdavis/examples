@@ -63,8 +63,8 @@ class Pardot
 	    $apistring = $this->getPardotinfo(
 			'https://pi.pardot.com/api/login/version/4',
 		    array(
-		        'email' => 'parexel@saltwaterco.com',
-		        'password' => '44Qj8CkgaF!E9fw',
+		        'email' => 'XXX',
+		        'password' => 'XXX',
 		        'user_key' => Core::make('pardot/helper/tools')->getSettingsArray('userkey')
 		    ),
 		    'POST'
