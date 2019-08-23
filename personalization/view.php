@@ -59,7 +59,6 @@ class Controller extends BlockController
         if(!$_COOKIE["swdc_mkt"] || $userData->v != $version){
             if (Core::make('saltwater_dynamic_content/helper/marketo')->errorCheck() === false ){
                 $userData = Core::make('saltwater_dynamic_content/helper/marketo')->getMarketoLeadData();
-                //print_r($userData);
                 if($userData){
                     $userData = (object) array_merge( (array)$userData, array( 'v' => $version ) );
                     unset($userData->cookies);
@@ -90,7 +89,7 @@ class Controller extends BlockController
             if(!isset($ruleData[$bID])){
                 //if no rules are defined, then display this block
                 $passed = true;
-            } else{
+            } else {
                 foreach($ruleData[$bID] as $rule){
 
                     $comparison = $rule['comparison'];
@@ -103,7 +102,6 @@ class Controller extends BlockController
                     } else if(substr($rule['x'], 0, 4) === 'url_'){
 	                    $url_param = str_replace("url_", "", $rule['x']);
 	                	$x = $_GET[$url_param];
-//                         $x = $_COOKIE[$rule['x']];
                     	$x = strtolower($x);
                     //If rule is based on User activity
                     } else if(substr($rule['x'], 0, 4) === 'trk_'){
@@ -168,7 +166,7 @@ class Controller extends BlockController
             if($passed){
 	            if (end($bIDs) !== $bID){
 		            $rulespass = $passx." ".$passcompare." ".$passy;
-	            } else{
+	            } else {
 		            $rulespass = "DEFAULT";
 	            }
 	            $this->set('rulespass',$rulespass);
