@@ -17,9 +17,9 @@ class Pardot
 		        
 		    ),
 		    $key,
-		    Core::make('pardot/helper/tools')->getSettingsArray('userkey'),
+		    $this->getPardotcreds("userkey"),
 		    'GET',
-		    array('Authorization: Pardot api_key='.$key.', user_key='.Core::make('pardot/helper/tools')->getSettingsArray('userkey'))
+		    array('Authorization: Pardot api_key='.$key.', user_key='.$this->getPardotcreds("userkey"))
 		);
 		$prospectidLoad = simplexml_load_string($prospectidGet);
 		$prospectid = $prospectidLoad->visitor->prospect->id;
@@ -33,12 +33,12 @@ class Pardot
 			'https://pi.pardot.com/api/prospect/version/4/do/read/id/'.$this->getProspectId($formid, $apiKey),
 		    array(
 		        'api_key' => $apiKey,
-		        'user_key' => Core::make('pardot/helper/tools')->getSettingsArray('userkey')
+		        'user_key' => $this->getPardotcreds("userkey")
 		    ),
 		    $apiKey,
-		    Core::make('pardot/helper/tools')->getSettingsArray('userkey'),
+		    $this->getPardotcreds("userkey"),
 		    'GET',
-		    array('Authorization: Pardot api_key='.$apiKey.', user_key='.Core::make('pardot/helper/tools')->getSettingsArray('userkey'))
+		    array('Authorization: Pardot api_key='.$apiKey.', user_key='.$this->getPardotcreds("userkey"))
 		);
 		$getProspectInfo = simplexml_load_string($prospectInfoGet);
 		return $getProspectInfo;
@@ -50,7 +50,7 @@ class Pardot
 			'https://pi.pardot.com/api/campaign/version/4/do/query',
 		    array(
 		        'api_key' => $this->getPardotkey(),
-		        'user_key' => Core::make('pardot/helper/tools')->getSettingsArray('userkey')
+		        'user_key' => $this->getPardotcreds("userkey")
 		    ),
 		    'GET'
 		);
@@ -59,13 +59,12 @@ class Pardot
     }
     
     private function getPardotkey(){
-	    //return $this->getPardotcreds("pardotUsername");
 	    $apistring = $this->getPardotinfo(
 			'https://pi.pardot.com/api/login/version/4',
 		    array(
 		        'email' => 'XXX',
 		        'password' => 'XXX',
-		        'user_key' => Core::make('pardot/helper/tools')->getSettingsArray('userkey')
+		        'user_key' => $this->getPardotcreds("userkey")
 		    ),
 		    'POST'
 		);
@@ -85,6 +84,7 @@ class Pardot
         };
     }
     
+    //USED TO RETREIVE KEY, THIS CALL ONLY USED FOR A FEW LEGACY CALLS FROM PARDOT
     private function getPardotinfo($apicall, $data, $method){
 	    $apidata = http_build_query($data, null, '&');
 	    $url = $apicall."?".$apidata;
@@ -97,7 +97,6 @@ class Pardot
 	    if ($method == "POST") {
 	        curl_setopt($ch, CURLOPT_POST, true);
 	    } else if ($method == "GET") {
-	        // perhaps a DELETE?
 	        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, strtoupper($method));
 	    }
 	    $pardotApiResponse = curl_exec($ch);
@@ -108,12 +107,13 @@ class Pardot
 	    return $pardotApiResponse;
     }
     
+    //USED TO GET DATA, THIS IS USED FOR ALL UPDATED AND FUTURE CALLS
     private function getPardotinfoAuth($apicall, $data, $apikey, $userkey, $method, $header){
 	    $apidata = http_build_query($data, null, '&');
 	    $url = $apicall;
 	    $headers = array(
 		    'Content-Type: application/x-www-form-urlencoded',
-		    'Authorization: Pardot api_key='.$apikey.', user_key='.Core::make('pardot/helper/tools')->getSettingsArray('userkey')
+		    'Authorization: Pardot api_key='.$apikey.', user_key='.$this->getPardotcreds("userkey")
 		);
 	  
 	    $ch = curl_init();
